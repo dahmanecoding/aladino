@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kebab Aladino — Menu</title>
+<meta name="description" content="Kebab Aladino - Pizza, Kebab, Piadina, Panini. Ordina o scopri il menu completo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #100d0a;
+    --black-soft: #1a1512;
+    --card: #201a15;
+    --card-line: rgba(255,255,255,0.05);
+    --amber: #E8A93B;
+    --amber-deep: #C6801C;
+    --amber-glow: rgba(232,169,59,0.16);
+    --cream: #F3ECDE;
+    --grey: #a99d8c;
+    --radius: 20px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.45);
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  html, body{
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(232,169,59,0.05), transparent 40%),
+      var(--black);
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    animation: bodyIn .5s var(--ease);
+    height: 100dvh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  @keyframes bodyIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+
+  .serif{ font-family:'Fraunces', serif; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ---------- REVIEW BANNER ---------- */
+  .review-banner{
+    flex: 0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background: linear-gradient(100deg, #2a2117, #1c1712);
+    border-bottom: 1px solid var(--card-line);
+    padding: 13px 18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .review-banner::before{
+    content:"";
+    position:absolute;
+    top:0; left:-30%;
+    width:60%; height:100%;
+    background: linear-gradient(100deg, transparent, rgba(232,169,59,0.10), transparent);
+    animation: sheen 5s ease-in-out infinite;
+  }
+  @keyframes sheen{
+    0%{ left:-40%; }
+    45%{ left:110%; }
+    100%{ left:110%; }
+  }
+  .rating-chip{
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    line-height:1;
+    padding-right:4px;
+  }
+  .rating-chip strong{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:700;
+    color: var(--cream);
+  }
+  .rating-chip small{
+    font-size:8px;
+    color: var(--grey);
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    margin-top:2px;
+  }
+  .review-stars{
+    font-size:15px;
+    letter-spacing:2px;
+    color: var(--amber);
+    flex-shrink:0;
+    animation: starPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes starPulse{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
+  }
+  .review-copy{
+    flex:1;
+    min-width:0;
+  }
+  .review-copy strong{
+    display:block;
+    font-size:13.5px;
+    font-weight:700;
+    color: var(--cream);
+  }
+  .review-copy span{
+    font-size:11.5px;
+    color: var(--grey);
+  }
+  .review-btn{
+    flex-shrink:0;
+    background: var(--amber);
+    color:#1c1509;
+    font-weight:800;
+    font-size:12.5px;
+    padding:9px 14px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    box-shadow: 0 0 0 rgba(232,169,59,0);
+  }
+  .review-btn:active{
+    transform: scale(0.94);
+  }
+  @media (hover:hover){
+    .review-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(232,169,59,0.3);
+    }
+  }
+
+  /* ---------- HEADER / HERO ---------- */
+  header.hero{
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 20% -10%, rgba(232,169,59,0.16), transparent 55%),
+      radial-gradient(circle at 85% 105%, rgba(232,169,59,0.08), transparent 50%),
+      linear-gradient(180deg, #161116 0%, #0d0a08 100%);
+    padding: clamp(10px, 3vh, 28px) 20px;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 14px 14px;
+    pointer-events:none;
+  }
+
+  .hero-inner{
+    width:100%;
+    max-width: 640px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap: clamp(18px, 5vh, 34px);
+  }
+
+  .giant-title{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: clamp(4px, 1.4vh, 12px);
+    line-height:0.92;
+  }
+  .giant-title .word{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-1px;
+    opacity:0;
+  }
+  .word-kebab{
+    font-size: clamp(52px, 15vw, 92px);
+    color: var(--cream);
+    animation: dropIn .7s var(--ease) .1s forwards;
+  }
+  .word-aladino{
+    font-size: clamp(52px, 15vw, 92px);
+    color: var(--amber);
+    animation: dropIn .7s var(--ease) .3s forwards;
+  }
+  @keyframes dropIn{
+    from{ opacity:0; transform: translateY(-14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .lamp-icon{
+    font-size: clamp(28px, 7vw, 40px);
+    margin: clamp(2px, 1vh, 10px) 0;
+    animation: lampFloat 3.2s ease-in-out infinite, fadeInLamp .6s ease .5s backwards;
+  }
+  @keyframes lampFloat{
+    0%,100%{ transform: translateY(0) rotate(-2deg); }
+    50%{ transform: translateY(-6px) rotate(2deg); }
+  }
+  @keyframes fadeInLamp{
+    from{ opacity:0; } to{ opacity:1; }
+  }
+
+  .hero-sub{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-size:13px;
+    color: var(--grey);
+    flex-wrap:wrap;
+    animation: fadeUp .6s var(--ease) .6s backwards;
+  }
+  .sub-divider{ color: rgba(255,255,255,0.2); }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(8px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .status-pill{
+    color: var(--amber);
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .status-pill .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: #6fd88f;
+    box-shadow:0 0 0 0 rgba(111,216,143,0.5);
+    animation: dotPulse 2s infinite;
+  }
+  @keyframes dotPulse{
+    0%{ box-shadow: 0 0 0 0 rgba(111,216,143,0.45); }
+    70%{ box-shadow: 0 0 0 7px rgba(111,216,143,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(111,216,143,0); }
+  }
+
+  .action-group{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:100%;
+  }
+
+  .cta-row{
+    display:flex;
+    gap:10px;
+    width:100%;
+    animation: fadeUp .6s var(--ease) .75s backwards;
+  }
+  .cta-btn{
+    flex:1;
+    text-align:center;
+    padding:14px 10px;
+    border-radius:14px;
+    font-weight:700;
+    font-size:14.5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    transition: transform .2s var(--ease), filter .2s var(--ease);
+  }
+  .cta-btn:active{ transform: scale(0.95); }
+  .cta-call{
+    background: var(--amber);
+    color:#1c1509;
+  }
+  .cta-whats{
+    background: rgba(255,255,255,0.05);
+    color: var(--cream);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  @media (hover:hover){
+    .cta-btn:hover{ filter:brightness(1.08); }
+  }
+
+  .cta-order{
+    width:100%;
+    text-align:center;
+    padding: 13px 10px;
+    border-radius:14px;
+    font-weight:700;
+    font-size: clamp(13px, 3.2vw, 14.5px);
+    color: var(--cream);
+    background: linear-gradient(100deg, rgba(232,169,59,0.14), rgba(232,169,59,0.05));
+    border: 1px solid rgba(232,169,59,0.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    transition: transform .2s var(--ease), filter .2s var(--ease);
+    animation: fadeUp .6s var(--ease) .8s backwards;
+  }
+  .cta-order:active{ transform: scale(0.96); }
+  @media (hover:hover){
+    .cta-order:hover{ filter:brightness(1.15); }
+  }
+
+  .hero-address{
+    font-size:12.5px;
+    color: var(--grey);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(169,157,140,0.35);
+    animation: fadeUp .6s var(--ease) .9s backwards;
+    transition: color .2s ease;
+  }
+  .hero-address:hover{ color: var(--amber); }
+
+  /* ---------- MAIN / SECTIONS ---------- */
+  main{
+    padding: 22px 16px 10px;
+    max-width: 640px;
+    margin:0 auto;
+  }
+
+  .section{
+    margin-bottom: 34px;
+    scroll-margin-top: 70px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:14px;
+    padding-left:2px;
+  }
+  .section-head h3{
+    font-size:19px;
+    font-weight:700;
+  }
+  .section-head .count{
+    font-size:12px;
+    color:var(--grey);
+    background: var(--card);
+    padding:2px 9px;
+    border-radius:10px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:14px;
+  }
+  .grid .food-card:nth-child(1){ animation-delay:.02s; }
+  .grid .food-card:nth-child(2){ animation-delay:.07s; }
+  .grid .food-card:nth-child(3){ animation-delay:.12s; }
+  .grid .food-card:nth-child(4){ animation-delay:.17s; }
+  .grid .food-card:nth-child(5){ animation-delay:.22s; }
+
+  /* ---------- FOOD CARD ---------- */
+  .food-card{
+    display:flex;
+    gap:0;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow:hidden;
+    border: 1px solid var(--card-line);
+    box-shadow: var(--shadow);
+    position:relative;
+    opacity:0;
+    transform: translateY(14px);
+    animation: cardIn .5s var(--ease) forwards;
+    transition: border-color .25s var(--ease), transform .25s var(--ease);
+  }
+  @keyframes cardIn{
+    to{ opacity:1; transform:translateY(0); }
+  }
+  @media (hover:hover){
+    .food-card:hover{
+      border-color: rgba(232,169,59,0.3);
+      transform: translateY(-2px);
+    }
+    .food-card:hover .food-img{ transform: scale(1.05); }
+  }
+  .food-card:active{ transform: scale(0.985); }
+
+  .food-img{
+    flex: 0 0 108px;
+    width:108px;
+    height:108px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    background: linear-gradient(145deg,#2d251a,#181310);
+    transition: transform .35s var(--ease);
+  }
+  .food-img::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at 30% 20%, var(--amber-glow), transparent 60%);
+  }
+
+  .food-body{
+    flex:1;
+    padding: 12px 14px 12px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:4px;
+    min-width:0;
+  }
+
+  .food-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  .food-name{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.3;
+  }
+
+  .food-desc{
+    font-size:12.5px;
+    color: var(--grey);
+    line-height:1.4;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .food-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:6px;
+  }
+
+  .price{
+    font-size:15px;
+    font-weight:800;
+    color: var(--amber);
+    white-space:nowrap;
+  }
+
+  .badge{
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    padding:3px 7px;
+    border-radius:6px;
+    background: var(--amber-glow);
+    color: var(--amber);
+  }
+  .badge.combo{
+    background: rgba(53,208,127,0.14);
+    color:#4fe098;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding: 30px 20px 20px;
+    color: var(--grey);
+    font-size:12px;
+  }
+  footer .foot-lamp{
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  footer b{color:var(--cream);}
+  footer .addr{margin-top:6px;}
+
+  /* ---------- PROMO BANNER ---------- */
+  .promo-banner{
+    flex: 0 0 auto;
+    position:relative;
+    z-index: 60;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: clamp(14px, 3vh, 20px) 20px calc(clamp(14px, 3vh, 20px) + env(safe-area-inset-bottom));
+    background:
+      linear-gradient(100deg, rgba(232,169,59,0.10), transparent 60%),
+      #17110b;
+    border-top: 1px solid rgba(232,169,59,0.18);
+    overflow:hidden;
+  }
+  .promo-tag{
+    flex-shrink:0;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size: clamp(12px, 3vw, 13.5px);
+    color:#1c1509;
+    background: var(--amber);
+    padding: 4px 11px;
+    border-radius: 20px;
+    animation: tagPop 2.6s ease-in-out infinite;
+  }
+  @keyframes tagPop{
+    0%,100%{ transform: scale(1) rotate(-2deg); }
+    50%{ transform: scale(1.06) rotate(2deg); }
+  }
+  .promo-text{
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight:600;
+    color: var(--cream);
+    white-space:nowrap;
+  }
+  .promo-text strong{
+    color: var(--amber);
+    font-weight:800;
+    letter-spacing:0.3px;
+  }
+  .promo-emoji{
+    font-size: clamp(20px, 5vw, 26px);
+    flex-shrink:0;
+    animation: emojiWobble 2.4s ease-in-out infinite;
+  }
+  @keyframes emojiWobble{
+    0%,100%{ transform: rotate(-8deg) scale(1); }
+    50%{ transform: rotate(8deg) scale(1.1); }
+  }
+  .promo-spark{
+    position:absolute;
+    color: var(--amber);
+    opacity:0.5;
+    font-size:12px;
+    animation: sparkTwinkle 1.8s ease-in-out infinite;
+  }
+  .s1{ top:14%; left:8%; animation-delay:0s; }
+  .s2{ bottom:18%; left:22%; font-size:9px; animation-delay:.5s; }
+  .s3{ top:20%; right:10%; animation-delay:1s; }
+  @keyframes sparkTwinkle{
+    0%,100%{ opacity:0.15; transform:scale(0.7); }
+    50%{ opacity:0.7; transform:scale(1.15); }
+  }
+
+  @media (min-width:480px){
+    .food-img{flex-basis:120px; width:120px; height:auto;}
+  }
+  @media (max-width:370px){
+    .review-stars{ display:none; }
+    .review-copy span{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<a href="https://www.google.com/maps/search/?api=1&query=Kebab+Aladino+Piazza+Martiri+della+Libert%C3%A0+38+Faenza" target="_blank" rel="noopener" class="review-banner">
+  <span class="rating-chip"><strong>4,5</strong><small>Google</small></span>
+  <span class="review-stars">★★★★★</span>
+  <span class="review-copy">
+    <strong>Ti è piaciuto? Faccelo sapere!</strong>
+    <span>Lascia una recensione su Google in 30 secondi</span>
+  </span>
+  <span class="review-btn">Recensisci →</span>
+</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="giant-title">
+      <span class="word word-kebab">Kebab</span>
+      <span class="lamp-icon">🧞‍♂️</span>
+      <span class="word word-aladino">Aladino</span>
+    </div>
+
+    <div class="hero-sub">
+      <span class="status-pill"><span class="dot"></span>Aperto ora</span>
+      <span class="sub-divider">·</span>
+      <span>11:00 – 23:00, tutti i giorni</span>
+    </div>
+
+    <div class="action-group">
+      <div class="cta-row">
+        <a href="tel:+390546793712" class="cta-btn cta-call">📞 Chiama ora</a>
+        <a href="https://wa.me/393889275999" class="cta-btn cta-whats">💬 WhatsApp</a>
+      </div>
+
+      <a href="https://www.justeat.it/restaurants-aladino---pizza-and-kebab-faenza/menu" target="_blank" rel="noopener" class="cta-order">
+        🛵 Ordina online su Just Eat
+      </a>
+    </div>
+
+    <a href="https://maps.google.com/?q=Piazza+Martiri+della+Libert%C3%A0+38+Faenza" target="_blank" rel="noopener" class="hero-address">
+      📍 Piazza Martiri della Libertà, 38 — Faenza
+    </a>
+  </div>
+</header>
+
+<div class="promo-banner">
+  <span class="promo-spark s1">✦</span>
+  <span class="promo-spark s2">✦</span>
+  <span class="promo-spark s3">✦</span>
+  <span class="promo-tag">Novità</span>
+  <span class="promo-text">Pizza kebab <strong>INTERA</strong></span>
+  <span class="promo-emoji">🍕</span>
+</div>
+
+<script>
+  // Reveal address line once hero has settled in
+  window.addEventListener('load', ()=>{
+    document.body.classList.add('ready');
+  });
+</script>
+
+</body>
+</html>
