@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kebab Aladino — Menu</title>
+<meta name="description" content="Kebab Aladino - Pizza, Kebab, Piadina, Panini. Ordina o scopri il menu completo.">
+<style>
+  :root{
+    --black: #121212;
+    --black-soft: #1c1c1c;
+    --card: #212121;
+    --yellow: #FFC72C;
+    --yellow-deep: #F5A300;
+    --white: #F7F7F5;
+    --grey: #9b9b9b;
+    --radius: 18px;
+    --shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    padding-bottom: 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ---------- HEADER / HERO ---------- */
+  header.hero{
+    position: relative;
+    background:
+      radial-gradient(circle at 20% -10%, rgba(255,199,44,0.18), transparent 55%),
+      linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
+    padding: 22px 20px 28px;
+    border-bottom: 4px solid var(--yellow);
+    overflow:hidden;
+  }
+
+  .top-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .brand .lamp{
+    width:38px; height:38px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;
+  }
+
+  .brand-text h1{
+    font-size:19px;
+    letter-spacing:0.3px;
+    font-weight:700;
+  }
+  .brand-text span{
+    font-size:11px;
+    color:var(--yellow);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  .status-pill{
+    background: rgba(255,199,44,0.12);
+    border:1px solid rgba(255,199,44,0.4);
+    color: var(--yellow);
+    font-size:11px;
+    font-weight:600;
+    padding:6px 10px;
+    border-radius:20px;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .status-pill .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: #35d07f;
+    box-shadow:0 0 6px #35d07f;
+  }
+
+  .hero-info{
+    background: var(--black-soft);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .hero-info h2{
+    font-size:22px;
+    line-height:1.25;
+    font-weight:700;
+  }
+  .hero-info h2 em{
+    color:var(--yellow);
+    font-style:normal;
+  }
+
+  .info-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color: var(--grey);
+  }
+  .info-line b{color:var(--white); font-weight:600;}
+
+  .cta-row{
+    display:flex;
+    gap:10px;
+    margin-top:6px;
+  }
+  .cta-btn{
+    flex:1;
+    text-align:center;
+    padding:12px 10px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:13.5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .cta-call{
+    background: var(--yellow);
+    color:#141414;
+  }
+  .cta-whats{
+    background: rgba(255,255,255,0.06);
+    color: var(--white);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ---------- CATEGORY NAV ---------- */
+  nav.cat-nav{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    background: rgba(18,18,18,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 12px 0;
+  }
+  .cat-scroll{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding: 0 16px;
+    scrollbar-width:none;
+  }
+  .cat-scroll::-webkit-scrollbar{display:none;}
+  .cat-chip{
+    flex:0 0 auto;
+    padding:9px 16px;
+    border-radius:20px;
+    background: var(--card);
+    color: var(--grey);
+    font-size:13px;
+    font-weight:600;
+    border:1px solid rgba(255,255,255,0.07);
+    white-space:nowrap;
+    transition: all .2s ease;
+  }
+  .cat-chip.active{
+    background: var(--yellow);
+    color:#141414;
+    border-color:var(--yellow);
+  }
+
+  /* ---------- MAIN / SECTIONS ---------- */
+  main{
+    padding: 22px 16px 10px;
+    max-width: 640px;
+    margin:0 auto;
+  }
+
+  .section{
+    margin-bottom: 34px;
+    scroll-margin-top: 70px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:14px;
+    padding-left:2px;
+  }
+  .section-head h3{
+    font-size:19px;
+    font-weight:700;
+  }
+  .section-head .count{
+    font-size:12px;
+    color:var(--grey);
+    background: var(--card);
+    padding:2px 9px;
+    border-radius:10px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:14px;
+  }
+
+  /* ---------- FOOD CARD ---------- */
+  .food-card{
+    display:flex;
+    gap:0;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: var(--shadow);
+    position:relative;
+  }
+
+  .food-img{
+    flex: 0 0 108px;
+    width:108px;
+    height:108px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    background: linear-gradient(145deg,#2a2a2a,#161616);
+  }
+  .food-img::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at 30% 20%, rgba(255,199,44,0.16), transparent 60%);
+  }
+
+  .food-body{
+    flex:1;
+    padding: 12px 14px 12px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:4px;
+    min-width:0;
+  }
+
+  .food-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  .food-name{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.3;
+  }
+
+  .food-desc{
+    font-size:12.5px;
+    color: var(--grey);
+    line-height:1.4;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .food-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:6px;
+  }
+
+  .price{
+    font-size:15px;
+    font-weight:800;
+    color: var(--yellow);
+    white-space:nowrap;
+  }
+
+  .badge{
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    padding:3px 7px;
+    border-radius:6px;
+    background: rgba(255,199,44,0.14);
+    color: var(--yellow);
+  }
+  .badge.combo{
+    background: rgba(53,208,127,0.14);
+    color:#4fe098;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding: 30px 20px 20px;
+    color: var(--grey);
+    font-size:12px;
+  }
+  footer .foot-lamp{
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  footer b{color:var(--white);}
+  footer .addr{margin-top:6px;}
+
+  /* ---------- STICKY BOTTOM BAR ---------- */
+  .bottom-bar{
+    position: fixed;
+    bottom:0; left:0; right:0;
+    z-index: 60;
+    background: rgba(18,18,18,0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    display:flex;
+    gap:10px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .bottom-bar a{
+    flex:1;
+    text-align:center;
+    padding: 13px 10px;
+    border-radius: 14px;
+    font-weight:700;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+  }
+  .bar-call{ background: var(--yellow); color:#141414; }
+  .bar-whats{ background: #25D366; color:#0a0a0a; }
+
+  @media (min-width:480px){
+    .food-img{flex-basis:120px; width:120px; height:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="top-row">
+    <div class="brand">
+      <div class="lamp">🧞‍♂️</div>
+      <div class="brand-text">
+        <h1>Kebab Aladino</h1>
+        <span>Pizza · Kebab · Piadina</span>
+      </div>
+    </div>
+    <div class="status-pill"><span class="dot"></span>Aperto ora</div>
+  </div>
+
+  <div class="hero-info">
+    <h2>Sapori autentici, <em>ogni giorno</em>.</h2>
+    <div class="info-line">🕐 <b>Aperto tutti i giorni</b> — 11:00 / 23:00</div>
+    <div class="info-line">📍 <a href="https://maps.google.com/?q=Piazza+Martiri+della+Libertà+38+Faenza" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Piazza Martiri della Libertà, 38 — Faenza</a></div>
+    <div class="cta-row">
+      <a href="tel:+390546793712" class="cta-btn cta-call">📞 0546 793712</a>
+      <a href="https://wa.me/393889275999" class="cta-btn cta-whats">💬 WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<nav class="cat-nav">
+  <div class="cat-scroll" id="catScroll">
+    <a href="#menu" class="cat-chip active">🔥 Menu</a>
+    <a href="#piatti" class="cat-chip">🍽️ I Piatti</a>
+    <a href="#panini" class="cat-chip">🥙 Panini</a>
+    <a href="#contorni" class="cat-chip">🍟 Contorni</a>
+    <a href="#altro" class="cat-chip">🍕 Altro</a>
+  </div>
+</nav>
+
+<main>
+
+  <section class="section" id="menu">
+    <div class="section-head">
+      <h3>Menu Combo</h3>
+      <span class="count">2 offerte</span>
+    </div>
+    <div class="grid">
+
+      <div class="food-card">
+        <div class="food-img">🌯</div>
+        <div class="food-body">
+          <div class="food-top">
+            <div class="food-name">Menu Piadina</div>
+          </div>
+          <div class="food-desc">Piadina kebab, patatine fritte e bibita in lattina</div>
+          <div class="food-footer">
+            <span class="badge combo">Menu completo</span>
+            <span class="price">10,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🥙</div>
+        <div class="food-body">
+          <div class="food-top">
+            <div class="food-name">Menu Panino</div>
+          </div>
+          <div class="food-desc">Panino kebab, patatine fritte e bibita in lattina</div>
+          <div class="food-footer">
+            <span class="badge combo">Menu completo</span>
+            <span class="price">9,00 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="piatti">
+    <div class="section-head">
+      <h3>I Piatti</h3>
+      <span class="count">5 piatti</span>
+    </div>
+    <div class="grid">
+
+      <div class="food-card">
+        <div class="food-img">🍖</div>
+        <div class="food-body">
+          <div class="food-name">Vaschetta Di Kebab Piccola</div>
+          <div class="food-desc">Solo carne di kebab</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">9,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🍖</div>
+        <div class="food-body">
+          <div class="food-name">Vaschetta Di Kebab Media</div>
+          <div class="food-desc">Solo carne di kebab</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">18,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🍖</div>
+        <div class="food-body">
+          <div class="food-name">Vaschetta Di Kebab Grande</div>
+          <div class="food-desc">Solo carne di kebab</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">22,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🥗</div>
+        <div class="food-body">
+          <div class="food-name">Piatto Felafel</div>
+          <div class="food-desc">Polpette di verdura con pastella di noci</div>
+          <div class="food-footer">
+            <span class="badge">Veg</span>
+            <span class="price">9,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🍛</div>
+        <div class="food-body">
+          <div class="food-name">Kebab Aladino</div>
+          <div class="food-desc">Piatto unico di carne, verdure e patate</div>
+          <div class="food-footer">
+            <span class="badge">Specialità</span>
+            <span class="price">9,00 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="panini">
+    <div class="section-head">
+      <h3>Panini & Piadine</h3>
+      <span class="count">5 prodotti</span>
+    </div>
+    <div class="grid">
+
+      <div class="food-card">
+        <div class="food-img">🌯</div>
+        <div class="food-body">
+          <div class="food-name">Piadina Kebab</div>
+          <div class="food-desc">Solo carne</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">6,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🥙</div>
+        <div class="food-body">
+          <div class="food-name">Panini Falafel</div>
+          <div class="food-desc">Panino di verdure con pastella di noci</div>
+          <div class="food-footer">
+            <span class="badge">Veg</span>
+            <span class="price">5,50 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🥩</div>
+        <div class="food-body">
+          <div class="food-name">Panino Kofta</div>
+          <div class="food-desc">Polpette di carne macinata di tacchino e salse</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">6,00 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🐟</div>
+        <div class="food-body">
+          <div class="food-name">Panino Al Tonno</div>
+          <div class="food-desc">Pane, tonno, insalata, salsa yogurt, ketchup, maionese e pomodoro</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">5,50 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🍢</div>
+        <div class="food-body">
+          <div class="food-name">Panino Seekh Kebab</div>
+          <div class="food-desc">Bastoncini di tacchino con spezie</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">6,00 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="contorni">
+    <div class="section-head">
+      <h3>Contorni</h3>
+      <span class="count">2 prodotti</span>
+    </div>
+    <div class="grid">
+
+      <div class="food-card">
+        <div class="food-img">🍟</div>
+        <div class="food-body">
+          <div class="food-name">Patatine Fritte Piccola</div>
+          <div class="food-desc">Porzione piccola</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">2,50 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-img">🍟</div>
+        <div class="food-body">
+          <div class="food-name">Patatine Fritte Grande</div>
+          <div class="food-desc">Porzione grande</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">5,50 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="altro">
+    <div class="section-head">
+      <h3>Pizza</h3>
+      <span class="count">1 prodotto</span>
+    </div>
+    <div class="grid">
+
+      <div class="food-card">
+        <div class="food-img">🍕</div>
+        <div class="food-body">
+          <div class="food-name">Pizza Al Trancio</div>
+          <div class="food-desc">Verdure, patatine, carne e salse</div>
+          <div class="food-footer">
+            <span></span>
+            <span class="price">3,50 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-lamp">🧞‍♂️</div>
+  <b>Kebab Aladino</b>
+  <div class="addr">Aperto tutti i giorni · 11:00 – 23:00</div>
+  <div class="addr">Tel: 0546 793712 · WhatsApp: 388 9275999</div>
+  <div class="addr"><a href="https://maps.google.com/?q=Piazza+Martiri+della+Libertà+38+Faenza" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Piazza Martiri della Libertà, 38 — Faenza</a></div>
+</footer>
+
+<div class="bottom-bar">
+  <a href="tel:+390546793712" class="bar-call">📞 Chiama</a>
+  <a href="https://wa.me/393889275999" class="bar-whats">💬 WhatsApp</a>
+</div>
+
+<script>
+  // Highlight active category chip on scroll
+  const chips = document.querySelectorAll('.cat-chip');
+  const sections = document.querySelectorAll('main .section');
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        chips.forEach(c=>{
+          c.classList.toggle('active', c.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-100px 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chips.forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
